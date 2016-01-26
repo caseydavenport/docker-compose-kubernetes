@@ -22,6 +22,12 @@ docker-machine start <name>
 eval "$(docker-machine env $(docker-machine active))"
 ```
 
+Note that if you have an existing kubectl configuration, you will need to move it out of the way in order to get kubectl to work correctly
+
+```sh
+mv ~/.kube ~/.kube-backup
+```
+
 Then, launch the Kubernetes cluster in boot2docker via Docker Machine:
 
 ```sh
@@ -49,4 +55,3 @@ You can access Kube UI at http://localhost:8080/ui.
 ```
 
 This will also remove any services, replication controllers and pods that are running in the cluster.
-
