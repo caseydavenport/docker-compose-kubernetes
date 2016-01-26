@@ -2,7 +2,6 @@
 #
 # Set up kubectl port forwarding to docker-machine VM if needed.
 
-KUBERNETES_API_PORT=8080
 
 function active_machine {
     if [ $(command -v docker-machine) ]; then
@@ -28,4 +27,3 @@ function remove_port_if_forwarded {
     local port=$1
     pkill -f "ssh.*docker.*$port:localhost:$port"
 }
-

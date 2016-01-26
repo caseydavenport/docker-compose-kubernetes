@@ -8,6 +8,7 @@ if [ $? != 0 ]; then
     echo "Kubernetes already down?"
 fi
 
+source scripts/port-config.sh
 source scripts/docker-machine-port-forwarding.sh
 remove_port_if_forwarded $KUBERNETES_API_PORT
 
