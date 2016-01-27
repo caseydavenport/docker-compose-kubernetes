@@ -55,3 +55,17 @@ You can access Kube UI at http://localhost:8080/ui.
 ```
 
 This will also remove any services, replication controllers and pods that are running in the cluster.
+
+## Pushing your own images to kuberentes
+
+Pushing your own image uses docker machine and some port forwarding magic.
+Your localhost port 5000 is forwarded to the docker registry image.  Using
+localhost allows you to bypass the security checks. Here is an example of building an image.
+
+```sh
+docker build -t tnine/app1 .
+docker tag -f tnine/app1 localhost:5000/tnine/app1
+docker push  localhost:5000/tnine/app1
+```
+
+This will now make image ```tnine/app1``` available to Kubernetes.
