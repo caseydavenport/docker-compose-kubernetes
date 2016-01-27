@@ -61,3 +61,22 @@ f6809dfc8d69        gcr.io/google_containers/pause:0.8.0                 "/pause
 ##**Destroying the Cluster**
 
 To destroy the cluster run `./kube-down` within the `docker-compose-kubernetes` directory. 
+
+
+##**Local Registry**
+
+The cluster automatically starts a docker container with a local registry.  
+
+To use this registry you first tag images:
+
+```
+docker tag <image-name> localhost:5000/<image-name>
+```
+
+Then push the image to the registry:
+
+```
+docker push localhost:5000/<image-name>
+```
+
+You can now use images as though they came from dockerhub. Simply prepend the image name with `localhost:5000/` in your kubernetes `.yaml` files. 
