@@ -1,21 +1,36 @@
-# Launch [Kubernetes](http://kubernetes.io) using Docker via [Docker Compose](https://www.docker.com/docker-compose)
+# [Calico](http://projectcalico.org) and [Kubernetes](http://kubernetes.io) using [Docker Compose](https://www.docker.com/docker-compose)
 
-The following will also be set up for you:
+## Starting the Cluster
+This guide installs an all-in-one single node Kubernetes cluster using Docker on Linux or OSX.
+
+The following will also be deployed:
 
  * The Kubernetes [DNS addon](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns)
  * [Kube UI](http://kubernetes.io/v1.0/docs/user-guide/ui.html)
 
-## Starting Kubernetes on Linux
 
-On Linux we'll run Kubernetes using a local Docker Engine. You will also need Docker Compose as well as the kubectl tool. To launch the cluster:
+### Linux
+
+##### Requirements
+- [docker-compose](https://docs.docker.com/compose/install/)
+- [kubectl](http://storage.googleapis.com/kubernetes-release/release/v1.1.7/bin/linux/amd64/kubectl)
+
+On Linux we'll run Kubernetes using a local Docker Engine. To launch the cluster:
 
 ```sh
 ./kube-up.sh
 ```
 
-## Starting Kubernetes on OS X
+#### OSX
 
-On OS X we'll launch Kubernetes inside a [boot2docker](http://boot2docker.io) VM via [Docker Machine](https://docs.docker.com/machine/). You will need to have Docker Machine (v0.5.0 or newer), Docker Compose, and the kubectl tool installed locally. First start your boot2docker VM:
+On OS X we'll launch Kubernetes inside a [boot2docker](http://boot2docker.io) VM via [Docker Machine](https://docs.docker.com/machine/). 
+
+##### Requirements:
+- [virtualbox](https://www.virtualbox.org/wiki/Downloads)
+- [docker tools](https://docs.docker.com/mac/step_one/)
+- kubectl: `brew install kubernetes-cli`
+
+First start your boot2docker VM:
 
 ```sh
 docker-machine start <name>
@@ -28,9 +43,9 @@ Then, launch the Kubernetes cluster in boot2docker via Docker Machine:
 ./kube-up.sh
 ```
 
-The script will set up port forwarding so that you can use kubectl locally without having to ssh into boot2docker.
+The script will set up port forwarding so that you can use `kubectl` locally without having to ssh into boot2docker.
 
-## Checking if Kubernetes Is Running
+## Check if Kubernetes Is Running
 
 ```sh
 kubectl cluster-info
@@ -49,4 +64,3 @@ You can access Kube UI at http://localhost:8080/ui.
 ```
 
 This will also remove any services, replication controllers and pods that are running in the cluster.
-
