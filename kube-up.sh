@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+export HOSTNAME=$(hostname)
 
 require_command_exists() {
     command -v "$1" >/dev/null 2>&1 || { echo "$1 is required but is not installed. Aborting." >&2; exit 1; }
@@ -29,6 +30,10 @@ else
 	# Copy script to docker-machine and run.
 	docker-machine scp $this_dir/scripts/install-calico-cni.sh $DOCKER_MACHINE_NAME:/home
 	docker-machine ssh $DOCKER_MACHINE_NAME /home/install-calico-cni.sh
+
+	# Forward ports for API and calicoctl.
+	docker-machine ssh `docker-machine active` -N -L 8080:localhost:8080
+	docker-machine ssh `docker-machine active` -N -L 4040:localhost:4040
 fi
 
 cd "$this_dir/etcd"

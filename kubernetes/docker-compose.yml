@@ -4,7 +4,7 @@ master:
   pid: host
   privileged: true
   environment:
-    - HOSTNAME=k8s_host
+    - HOSTNAME=${HOSTNAME}
   volumes:
     - /sys:/sys:ro
     - /dev:/dev

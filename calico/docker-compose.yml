@@ -1,18 +1,28 @@
 calico-node:
-  image: calico/node:latest
-  container_name: calico-node
-  net: host
-  privileged: true
-  restart: always
-  environment:
-  - HOSTNAME=k8s_host
-  - IP= 
-  - IP6= 
-  - CALICO_NETWORKING=true 
-  - AS= 
-  - NO_DEFAULT_POOLS= 
-  - ETCD_AUTHORITY=127.0.0.1:4040
-  - ETCD_SCHEME=http 
-  volumes:
-  - /var/run/calico:/var/run/calico:rw
-  - /var/log/calico:/var/log/calico:rw
+        image: calico/node:v0.19.0
+        container_name: calico-node
+        net: host
+        privileged: true
+        restart: always
+        environment:
+        - HOSTNAME=${HOSTNAME}
+        - IP= 
+        - IP6= 
+        - CALICO_NETWORKING=true 
+        - AS= 
+        - NO_DEFAULT_POOLS=false 
+        - ETCD_AUTHORITY=127.0.0.1:4040
+        - ETCD_SCHEME=http 
+        volumes:
+        - /var/run/calico:/var/run/calico:rw
+        - /var/log/calico:/var/log/calico:rw
+  
+calico-policy-agent:
+        image: calico/k8s-policy-agent:v0.1.4
+        container_name: calico-policy-agent
+        net: host
+        privileged: true
+        restart: always
+        environment:
+        - K8S_API=http://127.0.0.1:8080
+        - ETCD_ENDPOINTS=http://127.0.0.1:4040

@@ -2,6 +2,8 @@
 
 this_dir=$(cd -P "$(dirname "$0")" && pwd)
 
+export HOSTNAME=$(hostname)
+
 echo "Removing replication controllers, services, pods and secrets..."
 kubectl delete replicationcontrollers,services,pods,secrets --all
 

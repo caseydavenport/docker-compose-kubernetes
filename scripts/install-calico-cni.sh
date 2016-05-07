@@ -21,7 +21,7 @@ sudo cat >10-calico.conf <<EOF
         "type": "calico-ipam"
     },
     "policy": {
-        "type": "k8s-annotations",
+        "type": "k8s",
         "k8s_api_root": "http://127.0.0.1:8080/api/v1"
     }
 }
