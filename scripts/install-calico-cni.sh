@@ -16,7 +16,7 @@ sudo cat >10-calico.conf <<EOF
 {
     "name": "calico-k8s-net",
     "type": "calico",
-    "etcd_authority": "127.0.0.1:4001",
+    "etcd_authority": "127.0.0.1:4040",
     "ipam": {
         "type": "calico-ipam"
     },

@@ -4,6 +4,7 @@ this_dir=$(cd -P "$(dirname "$0")" && pwd)
 
 echo "Removing replication controllers, services, pods and secrets..."
 kubectl delete replicationcontrollers,services,pods,secrets --all
+
 if [ $? != 0 ]; then
     echo "Kubernetes already down?"
 fi
@@ -19,6 +20,13 @@ if [ ! -z "$(docker-compose ps -q)" ]; then
 fi
 
 cd "$this_dir/calico"
+
+if [ ! -z "$(docker-compose ps -q)" ]; then
+    docker-compose stop
+    docker-compose rm -f -v
+fi
+
+cd "$this_dir/etcd"
 
 if [ ! -z "$(docker-compose ps -q)" ]; then
     docker-compose stop

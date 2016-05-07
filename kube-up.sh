@@ -31,6 +31,9 @@ else
 	docker-machine ssh $DOCKER_MACHINE_NAME /home/install-calico-cni.sh
 fi
 
+cd "$this_dir/etcd"
+docker-compose up -d
+
 cd "$this_dir/kubernetes"
 docker-compose up -d
 

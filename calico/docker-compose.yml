@@ -11,7 +11,7 @@ calico-node:
   - CALICO_NETWORKING=true 
   - AS= 
   - NO_DEFAULT_POOLS= 
-  - ETCD_AUTHORITY=127.0.0.1:4001
+  - ETCD_AUTHORITY=127.0.0.1:4040
   - ETCD_SCHEME=http 
   volumes:
   - /var/run/calico:/var/run/calico:rw
